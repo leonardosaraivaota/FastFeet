@@ -63,7 +63,7 @@ export default function DeliveryDetail({ navigation }) {
 
   function handleConfirmDelivery(id) {
     // console.log(id);
-    navigation.navigate('DeliveryConfirm', { id });
+    navigation.navigate('DeliveryConfirm', { delivery, id });
   }
 
   return (

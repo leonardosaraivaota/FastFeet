@@ -13,58 +13,36 @@ import {
 } from './styles';
 
 export default function DeliveryConfirm({ navigation }) {
-  const delivery = navigation.getParam('id');
+  const delivery = navigation.getParam('delivery');
+  const deliveryId = navigation.getParam('id');
   const [camera, setCamera] = useState('');
   const [file, setFile] = useState('');
 
-  // Cria o corpo da requisição adicionando o arquivo
-  // const createFormData = photo => {
-  async function createFormData(photo_captured) {
-    const data = new FormData();
-    data.append('file', {
+  async function createFormData() {
+    const dataFile = new FormData();
+    dataFile.append('file', {
       // data.append({
-      uri: photo_captured.uri,
-      name: `${delivery}.jpg`,
-      type: 'image/jpg',
+      uri: file.uri,
+      name: `${deliveryId}.jpg`,
+      type: 'image/jpeg',
     });
-    return data;
+    return dataFile;
   }
 
   async function handleSubmit() {
     try {
-      const dataFile = new FormData();
-      dataFile.append('file', {
-        // data.append({
-        uri: file.uri,
-        name: `${delivery}.jpg`,
-        type: 'image/jpeg',
+      const bodyData = await createFormData();
+      const response = await api.post('signatures', bodyData);
+      console.tron.log(response);
+      const flag = await api.put(`delivery-picker/${deliveryId}`, {
+        delivery_id: delivery.id,
+        recipient_id: delivery.recipient_id,
+        deliveryman_id: delivery.deliveryman_id,
+        signature_id: response.data.id,
+        product: delivery.product,
+        end_date: delivery.end_date,
       });
-      console.log(dataFile);
-      const response = await api.post('signatures', { dataFile });
-      // console.log(response);
-
-      // console.log(uri);
-      // Corpo da requisição
-      // const bodyData = await createFormData(uri);
-
-      // Instância do axios realizando requisição a api
-      /*
-    const text = await axios({
-      url: 'signatures',
-      method: 'post',
-      data: bodyData,
-      // Configura os headers para aceitarem arquivos
-      config: { headers: { 'Content-Type': 'multipart/form-data' } },
-    })
-      .then(response => {
-        return response;
-      })
-      .catch(error => {
-        return { data: 'falha ao processar texto' };
-      });
-    // Retorna o texto processado ou mensagem de erro
-    return text.data;
-    */
+      console.tron.log(flag);
     } catch (err) {
       console.tron.log(err);
     }
@@ -80,7 +58,7 @@ export default function DeliveryConfirm({ navigation }) {
       // setPhoto(data.uri);
       setFile(data);
       const response = await handleSubmit();
-      console.log(response);
+      // console.log(response);
     }
   };
 

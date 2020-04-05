@@ -23,7 +23,7 @@ export default function DeliveryProblemList({ navigation }) {
     async function loadDeliveryProblems() {
       // const response = await api.get(`/deliverymans/${id}/picks`);
       const response = await api.get(`delivery/${delivery_id}/problems`);
-      console.tron.log(response.data);
+      // console.tron.log(response.data);
       setDeliveryProblems(response.data);
     }
     loadDeliveryProblems();

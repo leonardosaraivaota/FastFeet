@@ -16,15 +16,13 @@ export default function DeliveryProblem({ data }) {
     });
     */
   }, [data.created_at]);
-
+  console.tron.log(dateParsed);
   return (
     <Container>
       {/* <Name>Encomenda {data.id}</Name> */}
       <Info>
-        <Description>
-          {data.description} {dateParsed}
-        </Description>
-        <Time />
+        <Description>{data.description}</Description>
+        <Time>{dateParsed}</Time>
       </Info>
     </Container>
   );

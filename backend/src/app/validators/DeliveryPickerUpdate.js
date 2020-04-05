@@ -8,7 +8,7 @@ export default async (req, res, next) => {
       deliveryman_id: Yup.number().required(),
       signature_id: Yup.number().required(),
       // start_date: Yup.date().required(),
-      end_date: Yup.date(),
+      // end_date: Yup.date(),
     });
 
     await schema.validate(req.body, { abortEarly: false });

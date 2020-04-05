@@ -140,7 +140,7 @@ routes.post(
   DeliveryPickerController.store
 );
 routes.put(
-  '/delivery-picker',
+  '/delivery-picker/:id',
   validateDeliveryPickerUpdate,
   DeliveryPickerController.update
 );
