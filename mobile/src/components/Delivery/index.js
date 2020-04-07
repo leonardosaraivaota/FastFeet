@@ -20,13 +20,36 @@ import {
 
 export default function Delivery({ data, onPress }) {
   const [currentPosition, setCurrentPosition] = useState(0);
+  const [index, setIndex] = useState(0);
 
   const dateParsed = useMemo(() => {
+    switch (data.status) {
+      case 'AGUARDANDO':
+        setIndex(0);
+        break;
+      case 'PENDENTE':
+        setIndex(1);
+        break;
+      case 'RETIRADA':
+        setIndex(2);
+        break;
+      case 'CANCELADA':
+        setIndex(3);
+        break;
+      case 'ENTREGUE':
+        setIndex(4);
+        break;
+      default:
+        setIndex(0);
+        break;
+    }
+    setCurrentPosition(index);
+
     return formatRelative(parseISO(data.created_at), new Date(), {
       locale: pt,
       addSuffix: true,
     });
-  }, [data.created_at]);
+  }, [data.created_at, data.status, index]);
 
   const labels = [
     'Aguardando Retirada',
