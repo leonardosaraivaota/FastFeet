@@ -9,7 +9,7 @@
 
 ## 📚 Sobre
 
-O projeto **FastFeet** é um sistema gerenciador de academias criado dentro do **Bootcamp Gostack** com o intúito de colocar
+O projeto **FastFeet** é um sistema gerenciador de transportadora criado dentro do **Bootcamp Gostack** com o intúito de colocar
 em prática todo o conteúdo estudado no curso.
 Desafio Final Bootcamp GoStack10 da Rocketseat
 
